@@ -760,10 +760,13 @@ body {
     html, body {
         height: auto;
         overflow-x: hidden;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
     }
     
     body {
         padding-bottom: 20px;
+        min-height: 100vh;
     }
     
     /* 顶部区域改为相对定位 */
@@ -786,12 +789,19 @@ body {
         right: 0;
         top: 0;
         width: 100%;
-        padding: 0 15px;
+        padding: 0 15px 20px;
         height: auto;
+        overflow-y: visible;
+        min-height: calc(100vh - 200px);
     }
     
     /* 隐藏右侧功能栏 */
     .top-function-bar {
+        display: none !important;
+    }
+    
+    /* 隐藏右上角登录按钮 */
+    .top-right-controls {
         display: none !important;
     }
     
