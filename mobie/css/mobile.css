@@ -1,0 +1,443 @@
+/* 手机端适配样式 - 收藏夹整理工具 */
+
+/* 基础变量 */
+:root {
+    --safe-area-top: env(safe-area-inset-top, 0px);
+    --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+    --header-height: 56px;
+    --nav-height: 48px;
+    --bottom-bar-height: 60px;
+}
+
+/* 手机端基础设置 */
+* {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.5;
+    overflow-x: hidden;
+    padding-bottom: calc(var(--bottom-bar-height) + var(--safe-area-bottom));
+}
+
+/* 顶部导航栏 */
+.mobile-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: calc(var(--header-height) + var(--safe-area-top));
+    padding-top: var(--safe-area-top);
+    background: linear-gradient(135deg, #1a2a3a 0%, #2a3a4a 100%);
+    color: white;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 16px;
+    padding-right: 16px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.mobile-header h1 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.mobile-header .header-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.mobile-header .icon-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    border: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+/* 分类导航 - 横向滚动 */
+.mobile-category-nav {
+    position: fixed;
+    top: calc(var(--header-height) + var(--safe-area-top));
+    left: 0;
+    right: 0;
+    height: var(--nav-height);
+    background: white;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.mobile-category-nav::-webkit-scrollbar {
+    display: none;
+}
+
+.mobile-category-nav .category-chip {
+    flex-shrink: 0;
+    padding: 6px 16px;
+    margin-right: 8px;
+    border-radius: 20px;
+    background: #f0f0f0;
+    color: #666;
+    font-size: 14px;
+    border: none;
+    white-space: nowrap;
+    transition: all 0.2s;
+}
+
+.mobile-category-nav .category-chip.active {
+    background: #1a2a3a;
+    color: white;
+}
+
+/* 主内容区域 */
+.mobile-main {
+    margin-top: calc(var(--header-height) + var(--nav-height) + var(--safe-area-top) + 8px);
+    padding: 0 12px;
+    min-height: calc(100vh - var(--header-height) - var(--nav-height) - var(--bottom-bar-height));
+}
+
+/* 商品网格 - 2列布局 */
+.mobile-product-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+/* 商品卡片 */
+.mobile-product-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    position: relative;
+}
+
+.mobile-product-card .product-image-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+    background: #f5f5f5;
+    overflow: hidden;
+}
+
+.mobile-product-card .product-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.mobile-product-card .product-info {
+    padding: 10px;
+}
+
+.mobile-product-card .product-name {
+    font-size: 13px;
+    color: #333;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 6px;
+    height: 36px;
+}
+
+.mobile-product-card .product-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mobile-product-card .product-price {
+    font-size: 16px;
+    font-weight: 700;
+    color: #e74c3c;
+}
+
+.mobile-product-card .product-price::before {
+    content: '¥';
+    font-size: 12px;
+}
+
+.mobile-product-card .product-category {
+    font-size: 11px;
+    color: #999;
+    background: #f5f5f5;
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+/* 收藏按钮 */
+.mobile-product-card .favorite-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.9);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: #ccc;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.mobile-product-card .favorite-btn.active {
+    color: #e74c3c;
+}
+
+/* 底部操作栏 */
+.mobile-bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: calc(var(--bottom-bar-height) + var(--safe-area-bottom));
+    padding-bottom: var(--safe-area-bottom);
+    background: white;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1000;
+}
+
+.mobile-bottom-bar .bottom-btn {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: none;
+    color: #999;
+    font-size: 11px;
+    gap: 4px;
+}
+
+.mobile-bottom-bar .bottom-btn .icon {
+    font-size: 22px;
+}
+
+.mobile-bottom-bar .bottom-btn.active {
+    color: #1a2a3a;
+}
+
+/* 管理中心抽屉 */
+.mobile-drawer {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 320px;
+    height: 100%;
+    background: white;
+    z-index: 2000;
+    transition: right 0.3s ease;
+    box-shadow: -4px 0 20px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.mobile-drawer.open {
+    right: 0;
+}
+
+.mobile-drawer .drawer-header {
+    padding: 20px 16px;
+    background: linear-gradient(135deg, #1a2a3a 0%, #2a3a4a 100%);
+    color: white;
+}
+
+.mobile-drawer .drawer-header h2 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.mobile-drawer .drawer-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+}
+
+.mobile-drawer .drawer-section {
+    margin-bottom: 24px;
+}
+
+.mobile-drawer .drawer-section h3 {
+    font-size: 14px;
+    color: #999;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+.mobile-drawer .drawer-btn {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 8px;
+    border-radius: 10px;
+    border: none;
+    background: #f5f5f5;
+    color: #333;
+    font-size: 15px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.mobile-drawer .drawer-btn.danger {
+    background: #fee;
+    color: #c33;
+}
+
+/* 遮罩层 */
+.mobile-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 1999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+}
+
+.mobile-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 模态框 */
+.mobile-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3000;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+}
+
+.mobile-modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.mobile-modal .modal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+}
+
+.mobile-modal .modal-content {
+    position: relative;
+    background: white;
+    width: 100%;
+    max-height: 80%;
+    border-radius: 20px 20px 0 0;
+    padding: 20px;
+    transform: translateY(100%);
+    transition: transform 0.3s;
+}
+
+.mobile-modal.show .modal-content {
+    transform: translateY(0);
+}
+
+/* 加载动画 */
+.mobile-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+.mobile-loading .spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #f0f0f0;
+    border-top-color: #1a2a3a;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* 空状态 */
+.mobile-empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: #999;
+}
+
+.mobile-empty .icon {
+    font-size: 64px;
+    margin-bottom: 16px;
+}
+
+.mobile-empty p {
+    font-size: 14px;
+}
+
+/* 响应式适配 */
+@media (max-width: 375px) {
+    .mobile-product-grid {
+        gap: 8px;
+    }
+    
+    .mobile-product-card .product-info {
+        padding: 8px;
+    }
+    
+    .mobile-product-card .product-name {
+        font-size: 12px;
+    }
+}
+
+@media (min-width: 480px) and (max-width: 767px) {
+    .mobile-product-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

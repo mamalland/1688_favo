@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>收藏夹整理工具</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 页面右上角登录/退出按钮 - 固定位置 -->
+    <div class="top-right-controls">
+        <button id="login-btn" class="btn">登录</button>
+        <button id="logout-btn" class="btn" style="display: none;">退出</button>
+    </div>
+
+    <!-- 右侧功能按钮栏 - 固定位置 -->
+    <div class="top-function-bar" style="display: none;">
+        <button id="export-excel-btn" class="function-bubble" data-action="export">导出Excel</button>
+        <button id="import-excel-btn" class="function-bubble" data-action="import">导入Excel</button>
+        <button id="add-product-btn" class="function-bubble" data-action="add-product">增加商品</button>
+        <button id="batch-manage-btn" class="function-bubble" data-action="batch">批量管理</button>
+        <button id="admin-center-btn" class="function-bubble" data-action="admin">管理中心</button>
+    </div>
+
+    <!-- 固定Banner区域 -->
+    <div class="fixed-banner">
+        <!-- 顶部标题栏 -->
+        <header class="header">
+            <h1>收藏夹整理工具</h1>
+        </header>
+
+        <!-- 分类筛选栏 -->
+        <nav class="category-nav">
+            <button class="category-btn active" data-category="all">全部</button>
+            <!-- 分类按钮将通过JavaScript动态生成 -->
+            <button class="category-btn" data-category="archive">归档</button>
+        </nav>
+
+        <!-- 批量管理工具栏（登录后显示） -->
+        <div class="batch-controls" style="display: none;">
+            <button id="batch-delete-btn" class="btn" disabled>删除</button>
+            <button id="batch-archive-btn" class="btn" disabled>归档</button>
+            <button id="batch-change-category-btn" class="btn" disabled>修改分类</button>
+            <button id="cancel-batch-btn" class="btn">取消</button>
+        </div>
+    </div>
+
+    <!-- 主内容区域 -->
+    <div class="main-layout">
+        <!-- 商品展示区域 -->
+        <main class="product-grid">
+            <!-- 商品卡片将通过JavaScript动态生成 -->
+        </main>
+    </div>
+
+    <!-- 管理中心侧边栏 -->
+    <div id="admin-sidebar" class="admin-sidebar">
+        <div class="sidebar-header">
+            <h2>管理中心</h2>
+            <button class="close-sidebar">&times;</button>
+        </div>
+        <div class="sidebar-content">
+            <div class="sidebar-section">
+                <h3>分类管理</h3>
+                <button id="add-category-btn" class="sidebar-btn">增加分类</button>
+                <div class="category-list" id="sidebar-category-list">
+                    <!-- 分类列表将动态生成 -->
+                </div>
+            </div>
+            <div class="sidebar-section">
+                <h3>数据管理</h3>
+                <button id="delete-all-products-btn" class="sidebar-btn danger">一键删除所有商品</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 侧边栏遮罩 -->
+    <div id="sidebar-overlay" class="sidebar-overlay" style="display: none;"></div>
+
+    <!-- 外部库引用 -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
+    <!-- 初始数据文件 - 优先加载 -->
+    <script src="js/initial_data.js"></script>
+
+    <!-- JavaScript文件引用 -->
+    <script src="js/data.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/excel.js"></script>
+    <script src="js/scraper.js"></script>
+    <script src="js/app.js"></script>
+
+    <!-- 模态框 -->
+    <div id="modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-body">
+                <!-- 模态框内容将通过JavaScript动态生成 -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>

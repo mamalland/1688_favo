@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=no">
+    <title>收藏夹整理工具 - 手机版</title>
+    <link rel="stylesheet" href="css/mobile.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <header class="mobile-header">
+        <h1>收藏夹</h1>
+        <div class="header-actions">
+            <button class="icon-btn" onclick="toggleSearch()">🔍</button>
+            <button class="icon-btn" onclick="toggleDrawer()">☰</button>
+        </div>
+    </header>
+
+    <!-- 分类导航 -->
+    <nav class="mobile-category-nav" id="categoryNav">
+        <button class="category-chip active" data-category="all">全部</button>
+        <!-- 分类按钮将通过JavaScript动态生成 -->
+        <button class="category-chip" data-category="favorites">❤️ 收藏</button>
+    </nav>
+
+    <!-- 主内容区域 -->
+    <main class="mobile-main">
+        <!-- 商品网格 -->
+        <div class="mobile-product-grid" id="productGrid">
+            <!-- 商品卡片将通过JS动态生成 -->
+        </div>
+
+        <!-- 加载动画 -->
+        <div class="mobile-loading" id="loading" style="display: none;">
+            <div class="spinner"></div>
+        </div>
+
+        <!-- 空状态 -->
+        <div class="mobile-empty" id="emptyState" style="display: none;">
+            <div class="icon">📦</div>
+            <p>暂无商品</p>
+        </div>
+    </main>
+
+    <!-- 底部操作栏 -->
+    <nav class="mobile-bottom-bar">
+        <button class="bottom-btn active" data-view="grid">
+            <span class="icon">⊞</span>
+            <span>网格</span>
+        </button>
+        <button class="bottom-btn" data-view="list">
+            <span class="icon">☰</span>
+            <span>列表</span>
+        </button>
+        <button class="bottom-btn" onclick="showBatchActions()">
+            <span class="icon">✓</span>
+            <span>批量</span>
+        </button>
+        <button class="bottom-btn" onclick="toggleDrawer()">
+            <span class="icon">⚙</span>
+            <span>管理</span>
+        </button>
+    </nav>
+
+    <!-- 管理中心抽屉 -->
+    <div class="mobile-overlay" id="drawerOverlay" onclick="toggleDrawer()"></div>
+    <aside class="mobile-drawer" id="drawer">
+        <div class="drawer-header">
+            <h2>管理中心</h2>
+        </div>
+        <div class="drawer-content">
+            <div class="drawer-section">
+                <h3>数据管理</h3>
+                <button class="drawer-btn" onclick="exportData()">
+                    <span>📥</span> 导出数据
+                </button>
+                <button class="drawer-btn" onclick="importData()">
+                    <span>📤</span> 导入数据
+                </button>
+                <button class="drawer-btn" onclick="clearCache()">
+                    <span>🗑</span> 清除缓存
+                </button>
+            </div>
+            <div class="drawer-section">
+                <h3>系统</h3>
+                <button class="drawer-btn" onclick="switchToDesktop()">
+                    <span>💻</span> 切换到桌面版
+                </button>
+                <button class="drawer-btn danger" onclick="resetData()">
+                    <span>⚠</span> 重置所有数据
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- 搜索模态框 -->
+    <div class="mobile-modal" id="searchModal">
+        <div class="modal-backdrop" onclick="toggleSearch()"></div>
+        <div class="modal-content">
+            <h3>搜索商品</h3>
+            <input type="text" id="searchInput" placeholder="输入商品名称..." style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; margin: 16px 0;">
+            <button onclick="performSearch()" style="width: 100%; padding: 14px; background: #1a2a3a; color: white; border: none; border-radius: 8px; font-size: 16px;">搜索</button>
+        </div>
+    </div>
+
+    <!-- 批量操作模态框 -->
+    <div class="mobile-modal" id="batchModal">
+        <div class="modal-backdrop" onclick="hideBatchActions()"></div>
+        <div class="modal-content">
+            <h3>批量操作</h3>
+            <p style="color: #666; margin: 12px 0;">已选择 <span id="selectedCount">0</span> 个商品</p>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 16px;">
+                <button class="drawer-btn" onclick="batchFavorite()">
+                    <span>❤️</span> 添加到收藏
+                </button>
+                <button class="drawer-btn" onclick="batchExport()">
+                    <span>📥</span> 导出选中
+                </button>
+                <button class="drawer-btn danger" onclick="batchDelete()">
+                    <span>🗑</span> 删除选中
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 引入数据文件 -->
+    <script src="../js/initial_data.js"></script>
+    <script src="js/mobile.js"></script>
+</body>
+</html>
